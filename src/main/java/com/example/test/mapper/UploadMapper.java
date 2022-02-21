@@ -17,5 +17,8 @@ public interface UploadMapper {
 	
 	int countId(String id);
 	
-	int totalCount();
+	User falseId(String id);
+	
+	
+
 }

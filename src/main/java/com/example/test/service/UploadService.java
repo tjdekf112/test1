@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,10 +23,11 @@ import com.example.test.vo.User;
 @Service
 public class UploadService {
 	@Autowired UploadMapper uploadMapper;
+	@SuppressWarnings("unlikely-arg-type")
+	
 	public Map<String, Object> uploadFile(MultipartFile upfile) {
 		   Map<String, Object> paramMap = new HashMap<>();
 		   Map<String, Object> returnMap = new HashMap<>();
-		   Map<String, Object> returnMap1 = new HashMap<>();
 		   
 		   int result = 0;
 		   int resultCount = 0;
@@ -34,6 +36,8 @@ public class UploadService {
 		   int recodeCount =0;
 		   List<Object> list = null;
 		   list = new ArrayList<Object>();
+		   List<User> user1 = null;
+		   user1 = new ArrayList<User>();
 //		   int[] recode = {};
 		 File convFile = new File(upfile.getOriginalFilename());
 		// 매개변수로 받은 파일을 byte형으로 형 변환
@@ -85,7 +89,8 @@ public class UploadService {
                user.setLevel(level);
                user.setDesc(desc);
                */
-
+               user1.add(uploadMapper.falseId(id));
+               user1.removeAll(Arrays.asList("", null));
                // String형을 date형으로 변환.
                SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                try {
@@ -95,10 +100,7 @@ public class UploadService {
 	               System.out.println("debug : " + paramMap.toString());
 	               
 	               int countId = uploadMapper.countId(id);
-	              
-	               
 
-	               
 		               if(countId != 1) {
 		               resultCount = uploadMapper.fileuplaod(paramMap);
 		               result = result + resultCount;
@@ -108,19 +110,17 @@ public class UploadService {
 		               
 	               //중복이라면
 		               else if(countId == 1) {
-		            	 
+		            	   
 			               falseCount++;
 			               for(recodeCount =1; recodeCount<totalCount; recodeCount++) {
 			            	   System.out.println("recodeCount @#@#@#@    " + recodeCount);
-			            	   
+			 
 			               }
 			               list.add(recodeCount);
-			               System.out.println("list.toString @#!@#" + list.toString());
+			    
 			               System.out.println(recodeCount + "  recodeCount@@@@@@@@@@@@@@@@@@@@@@@@@2@3j@#");
 			               System.out.println(falseCount + "falseCount@#@");
 		               }
-		               
-
 
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -136,8 +136,11 @@ public class UploadService {
         returnMap.put("result", result);
         returnMap.put("falseCount", falseCount);
         returnMap.put("list", list);
+        returnMap.put("user1", user1);
         System.out.println("result : " + result);
         System.out.println("totalCount" + totalCount);
+        System.out.println("User.toString" + user1.toString());
+        
 		return returnMap;
 		
 	}

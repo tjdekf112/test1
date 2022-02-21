@@ -18,6 +18,10 @@
 		FROM public."USER" 
 		WHERE id=#{id};
 	</select>
-
 	
+		<select id="falseId" parameterType="String" resultType="com.example.test.vo.User">
+	SELECT id id, pwd pwd, name name, level level, "desc" desc, red_date redDate
+		FROM public."USER" 
+		WHERE id=#{id};
+	</select>
 </mapper>
