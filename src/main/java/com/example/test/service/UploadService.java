@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,6 @@ import com.example.test.vo.User;
 @Service
 public class UploadService {
 	@Autowired UploadMapper uploadMapper;
-	
 	public Map<String, Object> uploadFile(MultipartFile upfile) {
 		   Map<String, Object> paramMap = new HashMap<>();
 		   Map<String, Object> returnMap = new HashMap<>();
@@ -30,7 +30,11 @@ public class UploadService {
 		   int result = 0;
 		   int resultCount = 0;
 		   int falseCount =0;
-
+		   int totalCount =0;
+		   int recodeCount =0;
+		   List<Object> list = null;
+		   list = new ArrayList<Object>();
+//		   int[] recode = {};
 		 File convFile = new File(upfile.getOriginalFilename());
 		// 매개변수로 받은 파일을 byte형으로 형 변환
 		 try {
@@ -48,7 +52,7 @@ public class UploadService {
   	    	// scan을 사용하면 한번에 읽기가 가능함.
   	    	Scanner scan = new Scanner(convFile);
            while(scan.hasNextLine()){
-//        	   totalCount++;
+        	   totalCount++;
                String test = scan.nextLine();
                System.out.println(test);
                
@@ -81,9 +85,7 @@ public class UploadService {
                user.setLevel(level);
                user.setDesc(desc);
                */
-               
-               
-               
+
                // String형을 date형으로 변환.
                SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                try {
@@ -95,18 +97,30 @@ public class UploadService {
 	               int countId = uploadMapper.countId(id);
 	              
 	               
+
 	               
-	               if(countId != 1) {
-	               resultCount = uploadMapper.fileuplaod(paramMap);
-	               result = result + resultCount;
-	               
-	               System.out.println(result + "result@#@");
-	               } 
+		               if(countId != 1) {
+		               resultCount = uploadMapper.fileuplaod(paramMap);
+		               result = result + resultCount;
+		               
+		               System.out.println(result + "result@#@");
+		               } 
+		               
 	               //중복이라면
-	               else if(countId == 1) {
-		               falseCount++;
-		               System.out.println(falseCount + "falseCount@#@");
-	               }
+		               else if(countId == 1) {
+		            	 
+			               falseCount++;
+			               for(recodeCount =1; recodeCount<totalCount; recodeCount++) {
+			            	   System.out.println("recodeCount @#@#@#@    " + recodeCount);
+			            	   
+			               }
+			               list.add(recodeCount);
+			               System.out.println("list.toString @#!@#" + list.toString());
+			               System.out.println(recodeCount + "  recodeCount@@@@@@@@@@@@@@@@@@@@@@@@@2@3j@#");
+			               System.out.println(falseCount + "falseCount@#@");
+		               }
+		               
+
 
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -118,11 +132,12 @@ public class UploadService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+  	    
         returnMap.put("result", result);
         returnMap.put("falseCount", falseCount);
+        returnMap.put("list", list);
         System.out.println("result : " + result);
-        
-        
+        System.out.println("totalCount" + totalCount);
 		return returnMap;
 		
 	}

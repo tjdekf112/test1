@@ -3,6 +3,7 @@ package com.example.test.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -34,14 +35,19 @@ public class FormController {
 		Map<String, Object> upload = uploadService.uploadFile(upfile);
 		System.out.println("toString+++++" + upload.toString());
 		System.out.println("sdnfksnelf@#@#@#" + upload.get("falseCount"));
+		System.out.println("upload.get(\"list\");" + upload.get("list"));
+		
+
 		int test = (int) upload.get("falseCount");
-		// 틀린 횟수가 있다면
+		// 틀린 횟수가 없다면
 		if(test == 0){
 		return "redirect:/result?result="+ upload.get("result");
 		}
-
+		model.addAttribute("list", upload.get("list"));
+		model.addAttribute("result", upload.get("result"));
+		model.addAttribute("falseCount",upload.get("falseCount"));
 		// 틀린 횟수가 1개라도 있다면.
-		return "redirect:/false?result="+ upload.get("result")+"&falseCount="+upload.get("falseCount");
+		return "false";
 			
 		}
 	
@@ -64,11 +70,14 @@ public class FormController {
 		return "rest";
 	}
 	
-	@GetMapping("/false")
-	public String getfalse(Model model, String result, String falseCount) {
-		model.addAttribute("result", result);
-		model.addAttribute("falsecount", falseCount);
-		
-		return "false";
-	}
+//	@GetMapping("/false")
+//	public String getfalse(Model model, String result, String falseCount) {
+//		
+//		
+//		model.addAttribute("result", result);
+//		model.addAttribute("falsecount", falseCount);
+//		
+//		System.out.println(model.toString() + "model");
+//		return "false";
+//	}
 }
