@@ -11,7 +11,7 @@ import com.example.test.vo.User;
 @Mapper
 public interface UploadMapper {
 	//파일 업로드하여 DB에 저장.
-	void fileuplaod(Map<String, Object> paramMap);
+	int fileuplaod(Map<String, Object> paramMap);
 
 	List<User> ajaxdbfile();
 	

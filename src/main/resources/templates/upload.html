@@ -18,17 +18,17 @@
   var fileName;
   var filename;
   $(function(){
-		  $("#upfile").on("change", function(){
-			  // 확장자 확인.
-	  			filename = $("#upfile").val()
-	  			console.log(filename + " : filename");
-// 				fileName = filename.slice(filename.indexOf(".") + 1).toLowerCase();
-	  			fileName = filename.split('.').pop();
-			  console.log(fileName + " : fileName");
-	  		  });
-		  console.log(fileName + "fileName");
+// 		  $("#upfile").on("change", function(){
+// 			  // 확장자 확인.
+	  			
+// 	  		  });
+// 		  console.log(fileName + "fileName");
 	  $('#addUpLoadBtn').click(function(){
-				console.log(fileName + "fileName");
+		  filename = $("#upfile").val()
+			console.log(filename + " : filename");
+//			fileName = filename.slice(filename.indexOf(".") + 1).toLowerCase();
+			fileName = filename.split('.').pop();
+		  console.log(fileName + " : fileName");
 	  			if($('#upfile').val() == '') {
 			           alert('파일을 선택해주세요');
 		        }

@@ -33,35 +33,23 @@ public class FormController {
 
 		Map<String, Object> upload = uploadService.uploadFile(upfile);
 		System.out.println("toString+++++" + upload.toString());
-//		trueCount = upload.get("trueCount");
-//		totalCount = upload.get("totalCount");
-
-		
-		System.out.println(upload.get("totalCount") + "totalCount!!@@");
-		if(upload.get("trueCount").equals(upload.get("totalCount"))) {
-
-
-		model.addAttribute("count", upload.get("count"));
-		System.out.println(upload.get("count") + "count!@#");
-		return "redirect:/result?count="+ upload.get("count");
-		
-		//파일 업로드하는데 오류가 생긴다면...
-		//3개중 1개만 중복되지 않은 파일이라면 실패하고 1개는 DB에 값이 들어감.
-		}else{
-			
-			System.out.println(upload.get("trueCount") + "trueCount!!@@##$$");
-			System.out.println(upload.get("falseCount") + "falseCount!!@@");
-			return "redirect:/false?trueCount="+ upload.get("trueCount") + "&falseCount=" + upload.get("falseCount");
+		System.out.println("sdnfksnelf@#@#@#" + upload.get("falseCount"));
+		int test = (int) upload.get("falseCount");
+		// 틀린 횟수가 있다면
+		if(test == 0){
+		return "redirect:/result?result="+ upload.get("result");
 		}
-		
-		
-		
-	}
+
+		// 틀린 횟수가 1개라도 있다면.
+		return "redirect:/false?result="+ upload.get("result")+"&falseCount="+upload.get("falseCount");
+			
+		}
+	
 	
 	@GetMapping("/result")
-	public  String result(Model model , int count) {
-		System.out.println(count + "result count");
-		model.addAttribute("count", count);
+	public  String result(Model model , int result) {
+		System.out.println(result + "result count");
+		model.addAttribute("result", result);
 		return "result";
 	}
 	
@@ -77,9 +65,9 @@ public class FormController {
 	}
 	
 	@GetMapping("/false")
-	public String getfalse(Model model, int trueCount, int falseCount) {
-		model.addAttribute("trueCount", trueCount);
-		model.addAttribute("falseCount", falseCount);
+	public String getfalse(Model model, String result, String falseCount) {
+		model.addAttribute("result", result);
+		model.addAttribute("falsecount", falseCount);
 		
 		return "false";
 	}

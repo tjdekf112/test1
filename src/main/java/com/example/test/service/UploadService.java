@@ -27,9 +27,10 @@ public class UploadService {
 		   Map<String, Object> returnMap = new HashMap<>();
 		   Map<String, Object> returnMap1 = new HashMap<>();
 		   
-		   int count = 0;
-		   int trueCount = 0;
-		   int totalCount = 0;
+		   int result = 0;
+		   int resultCount = 0;
+		   int falseCount =0;
+
 		 File convFile = new File(upfile.getOriginalFilename());
 		// 매개변수로 받은 파일을 byte형으로 형 변환
 		 try {
@@ -39,7 +40,6 @@ public class UploadService {
 			fos.write(upfile.getBytes());
 			
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
 		// 형 변환한 파일 읽기
@@ -47,9 +47,8 @@ public class UploadService {
   	    	
   	    	// scan을 사용하면 한번에 읽기가 가능함.
   	    	Scanner scan = new Scanner(convFile);
-  	    	User user = new User();
            while(scan.hasNextLine()){
-        	   totalCount++;
+//        	   totalCount++;
                String test = scan.nextLine();
                System.out.println(test);
                
@@ -93,23 +92,21 @@ public class UploadService {
 	               paramMap.put("day", day);
 	               System.out.println("debug : " + paramMap.toString());
 	               
-	               System.out.println("trueCount = " + trueCount);
 	               int countId = uploadMapper.countId(id);
-	               if(countId != 1) {
-	               uploadMapper.fileuplaod(paramMap);
+	              
 	               
+	               
+	               if(countId != 1) {
+	               resultCount = uploadMapper.fileuplaod(paramMap);
+	               result = result + resultCount;
+	               
+	               System.out.println(result + "result@#@");
 	               } 
+	               //중복이라면
 	               else if(countId == 1) {
-	            	   System.out.println(trueCount + "trueCount#####");
-	            	   int falseCount = totalCount - trueCount;
-	            	   returnMap1.put("trueCount", trueCount);
-		               returnMap1.put("falseCount", falseCount);
-		               returnMap1.put("totalCount", totalCount);
-		               System.out.println("toString!!@@##" + returnMap1.toString());
-		               return returnMap1;
+		               falseCount++;
+		               System.out.println(falseCount + "falseCount@#@");
 	               }
-	               trueCount++;
-	               count ++;
 
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -119,14 +116,13 @@ public class UploadService {
            }
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-  	    System.out.println(trueCount + "trueCount22232323");
-        returnMap.put("count", count);
-        returnMap.put("trueCount", trueCount);
-        returnMap.put("totalCount", totalCount);
-        System.out.println("count : " + count);
+        returnMap.put("result", result);
+        returnMap.put("falseCount", falseCount);
+        System.out.println("result : " + result);
+        
+        
 		return returnMap;
 		
 	}
