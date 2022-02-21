@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.mapper.UploadMapper">
+
+		<insert id="fileuplaod" parameterType="Map">
+		INSERT INTO public."USER"(
+	id, pwd, name, level, "desc", red_date)
+	VALUES (#{id}, #{pwd}, #{name}, #{level}, #{desc}, #{day});
+	</insert>
+
+	<select id="ajaxdbfile" resultType="com.example.test.vo.User">
+		SELECT id id, pwd pwd, name name, level level, "desc" desc, red_date redDate
+		FROM public."USER"
+	</select>
+	
+	<select id="countId" parameterType="String" resultType="int">
+	SELECT COUNT(id) AS cnt 
+		FROM public."USER" 
+		WHERE id=#{id};
+	</select>
+
+	
+</mapper>
