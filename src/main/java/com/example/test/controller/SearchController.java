@@ -18,10 +18,12 @@ public class SearchController {
 	@Autowired UploadService uploadService;
 	
 	@GetMapping("/search")
-	public List<User> getsearch(){
+	public List<User> getsearch(Model model){
 		System.out.println("test" );
-		
+		// 전체 성공한 dbfile의 데이터 출력
 		List<User> user = uploadMapper.ajaxdbfile();
+		
+		model.addAttribute("user", user);
 		System.out.println(user.toString());
 		
 		return user;

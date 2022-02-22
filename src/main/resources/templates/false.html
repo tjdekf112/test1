@@ -2,15 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 조회 실패!
 <br>
-성공 횟수 : <p th:text="${result}"></p>
-실패 횟수 : <p th:text="${falseCount}"></p>
+성공 횟수  <p th:text="${result}"></p>
+실패 횟수  <p th:text="${falseCount}"></p>
 <br>
-실패한 라인 번호 : <p th:text="${list}"></p>
-텍스트 : <p th:text="${user1}"></p>
+실패한 라인 번호  <p th:text="${list}"></p>
+
+<!--  <p id="demo"></p> -->
+<!-- 타임리프 for문 -->
+텍스트
+<div th:each="product : ${user1}">
+<p th:text="${product}"></p>
+<!-- 텍스트 : <p th:text="${product.pwd}"></p> -->
+<!-- 텍스트 : <p th:text="${product.name}"></p> -->
+<!-- 텍스트 : <p th:text="${product.level}"></p> -->
+<!-- 텍스트 : <p th:text="${product.desc}"></p> -->
+<!-- 텍스트 : <p th:text="${product.redDate}"></p> -->
+</div>
 </body>
 </html>

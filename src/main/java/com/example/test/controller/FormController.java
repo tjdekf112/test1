@@ -30,17 +30,13 @@ public class FormController {
 	public String postupload(MultipartFile upfile, Model model){
 
 		Map<String, Object> upload = uploadService.uploadFile(upfile);
-		
-		System.out.println("toString+++++" + upload.toString());
-		System.out.println("sdnfksnelf@#@#@#" + upload.get("falseCount"));
-		System.out.println("upload.get(\"list\");" + upload.get("list"));
-		
 
 		int test = (int) upload.get("falseCount");
 		// 틀린 횟수가 없다면
 		if(test == 0){
 		return "redirect:/result?result="+ upload.get("result");
 		}
+		
 		model.addAttribute("user1", upload.get("user1"));
 		model.addAttribute("list", upload.get("list"));
 		model.addAttribute("result", upload.get("result"));

@@ -3,6 +3,7 @@ package com.example.test.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.ClientInfoStatus;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +35,10 @@ public class UploadService {
 		   int falseCount =0;
 		   int totalCount =0;
 		   int recodeCount =0;
+		   
 		   List<Object> list = null;
 		   list = new ArrayList<Object>();
+		   
 		   List<User> user1 = null;
 		   user1 = new ArrayList<User>();
 //		   int[] recode = {};
@@ -43,13 +46,17 @@ public class UploadService {
 		// 매개변수로 받은 파일을 byte형으로 형 변환
 		 try {
 			convFile.createNewFile();
+//			파일을 생성한다. 존재하는 파일일 경우 덮어쓰기함.
 			FileOutputStream fos = new FileOutputStream(convFile); 
-
-			fos.write(upfile.getBytes());
 			
+			//입력받은 내용을 파일 내용으로 기록.
+			fos.write(upfile.getBytes());
+			fos.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
+			
 		} 
+		 
 		// 형 변환한 파일 읽기
   	    try {
   	    	
@@ -89,7 +96,9 @@ public class UploadService {
                user.setLevel(level);
                user.setDesc(desc);
                */
+               //list type의 user1에 실패한 레코드 입력.
                user1.add(uploadMapper.falseId(id));
+               //null이 있을경우 사라지게함.
                user1.removeAll(Arrays.asList("", null));
                // String형을 date형으로 변환.
                SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -99,36 +108,41 @@ public class UploadService {
 	               paramMap.put("day", day);
 	               System.out.println("debug : " + paramMap.toString());
 	               
+	               //중복체크.
 	               int countId = uploadMapper.countId(id);
-
-		               if(countId != 1) {
+	               
+	               // 중복이 아니라면.
+		               if(countId == 0) {
+		            	   // 업로드
 		               resultCount = uploadMapper.fileuplaod(paramMap);
+		               // 성공횟수.
 		               result = result + resultCount;
 		               
 		               System.out.println(result + "result@#@");
 		               } 
 		               
 	               //중복이라면
-		               else if(countId == 1) {
-		            	   
+		               else if(countId >= 1) {
+		            	   //실패횟수
 			               falseCount++;
 			               for(recodeCount =1; recodeCount<totalCount; recodeCount++) {
 			            	   System.out.println("recodeCount @#@#@#@    " + recodeCount);
 			 
 			               }
+			               // 실패한 레코드의 라인번호 list 형태로 입력.
 			               list.add(recodeCount);
 			    
 			               System.out.println(recodeCount + "  recodeCount@@@@@@@@@@@@@@@@@@@@@@@@@2@3j@#");
 			               System.out.println(falseCount + "falseCount@#@");
 		               }
-
+		               
 			} catch (ParseException e) {
 				e.printStackTrace();
 				
 			}
 
            }
-
+           scan.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -137,10 +151,11 @@ public class UploadService {
         returnMap.put("falseCount", falseCount);
         returnMap.put("list", list);
         returnMap.put("user1", user1);
+        
         System.out.println("result : " + result);
         System.out.println("totalCount" + totalCount);
         System.out.println("User.toString" + user1.toString());
-        
+       
 		return returnMap;
 		
 	}

@@ -10,67 +10,15 @@
 <body>
 조회 성공!
 
-
-<!-- <input type="button" id="btn" value="click"> -->
-
-<table border="1">
-	<tr>
-		<td>ID</td>
-		<td>PWD</td>
-		<td>NAME</td>
-		<td>LEVEL</td>
-		<td>DESC</td>
-		<td>REDDATE</td>
-	</tr>
-	<tr>
-		<td id="id0"></td>
-		<td id="pwd0"></td>
-		<td id="name0"></td>
-		<td id="level0"></td>
-		<td id="desc0"></td>
-		<td id="redDate0"></td>
-	</tr>
-		<tr>
-		<td id="id1"></td>
-		<td id="pwd1"></td>
-		<td id="name1"></td>
-		<td id="level1"></td>
-		<td id="desc1"></td>
-		<td id="redDate1"></td>
-	</tr>
-		<tr>
-		<td id="id2"></td>
-		<td id="pwd2"></td>
-		<td id="name2"></td>
-		<td id="level2"></td>
-		<td id="desc2"></td>
-		<td id="redDate2"></td>
-	</tr>
-		<tr>
-		<td id="id3"></td>
-		<td id="pwd3"></td>
-		<td id="name3"></td>
-		<td id="level3"></td>
-		<td id="desc3"></td>
-		<td id="redDate3"></td>
-	</tr>
+<table border="1" >
+ <tbody id="demo"></tbody>
 </table>
 
-
-
-
- <div id="result"></div>
-
 </body>
+
 <script>
-// $(document).ready(function(){
-//     $('#btn').trigger('click');
-//  });
-
-
 $(function(){
-// 	$('#btn').on('click',function(){
-// 		alert("test");
+
 	$.ajax({
 		url:'/search',
 		type : 'get',
@@ -78,46 +26,20 @@ $(function(){
 			alert('연결성공');
 			console.log(data);
 
-            document.getElementById("id0").innerHTML=data[0].id;
-            document.getElementById("pwd0").innerHTML=data[0].pwd;
-            document.getElementById("name0").innerHTML=data[0].name;
-            document.getElementById("level0").innerHTML=data[0].level;
-            document.getElementById("desc0").innerHTML=data[0].desc;
-            document.getElementById("redDate0").innerHTML=data[0].redDate;
+				for(var i =0; i< data.length; i++){
+					
+					$("#demo").append("<tr>"); 
 
-            document.getElementById("id1").innerHTML=data[1].id;
-            document.getElementById("pwd1").innerHTML=data[1].pwd;
-            document.getElementById("name1").innerHTML=data[1].name;
-            document.getElementById("level1").innerHTML=data[1].level;
-            document.getElementById("desc1").innerHTML=data[1].desc;
-            document.getElementById("redDate1").innerHTML=data[1].redDate;
-
-            document.getElementById("id2").innerHTML=data[2].id;
-            document.getElementById("pwd2").innerHTML=data[2].pwd;
-            document.getElementById("name2").innerHTML=data[2].name;
-            document.getElementById("level2").innerHTML=data[2].level;
-            document.getElementById("desc2").innerHTML=data[2].desc;
-            document.getElementById("redDate2").innerHTML=data[2].redDate;
-
-            document.getElementById("id3").innerHTML=data[3].id;
-            document.getElementById("pwd3").innerHTML=data[3].pwd;
-            document.getElementById("name3").innerHTML=data[3].name;
-            document.getElementById("level3").innerHTML=data[3].level;
-            document.getElementById("desc3").innerHTML=data[3].desc;
-            document.getElementById("redDate3").innerHTML=data[3].redDate;
-
-			
-// 			for(var i = 0; i< data.length; i++){
-//            	 var jsonData = JSON.stringify(data[i]);
-           	 
-// //  			 $('#result').text(jsonData)
-//  			 document.write(jsonData);
- 			 
- 			 
-//  			 console.log(jsonData)
-//              }
-				
-            
+					$("#demo").append("<td>"+data[i].id+"</td>");
+					$("#demo").append("<td>"+data[i].pwd+"</td>");
+					$("#demo").append("<td>"+data[i].name+"</td>");
+					$("#demo").append("<td>"+data[i].level+"</td>");
+					$("#demo").append("<td>"+data[i].desc+"</td>");
+					$("#demo").append("<td>"+data[i].redDate+"</td>");
+					$("#demo").append("</tr>"); 
+					
+				}
+				  
 		},
 		error : function() {
 			alert('error');			
