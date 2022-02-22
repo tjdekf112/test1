@@ -34,7 +34,7 @@ public class UploadService {
 		   int falseCount =0;
 		   int totalCount =0;
 		   int recodeCount =0;
-		   
+		   // list 선언.
 		   List<Object> list = null;
 		   list = new ArrayList<Object>();
 		   
