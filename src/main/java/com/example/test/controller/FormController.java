@@ -3,6 +3,7 @@ package com.example.test.controller;
 import java.util.Map;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +13,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.test.mapper.UploadMapper;
 import com.example.test.service.UploadService;
-import com.example.test.vo.User;
 
 @Controller
 public class FormController {
 	@Autowired UploadService uploadService;
 	@Autowired UploadMapper uploadMapper;
 
-	
 	@GetMapping("/getupload")
 	public String getUpload() {
 		return "upload";
 	}
-	// 모델 엔드 뷰를 사용.
 	
 	@PostMapping("/postupload")
 	public String postupload(MultipartFile upfile, Model model){

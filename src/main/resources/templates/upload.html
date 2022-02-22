@@ -27,7 +27,7 @@
 		  filename = $("#upfile").val()
 			console.log(filename + " : filename");
 //			fileName = filename.slice(filename.indexOf(".") + 1).toLowerCase();
-			// 확장자만 구하기.
+			// 확장자만 구하기. '.' 마지막에 있는거만 추출 -> pop()
 			fileName = filename.split('.').pop();
 		  console.log(fileName + " : fileName");
 	  			if($('#upfile').val() == '') {
