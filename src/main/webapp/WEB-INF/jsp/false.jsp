@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,17 +18,19 @@
 실패 횟수  ${falseCount}
 <br>
 실패한 라인 번호  ${list}
+<br>
 
-<!--  <p id="demo"></p> -->
-<!-- 타임리프 for문 -->
 텍스트
-<div>${user1}"</div>
-<div>${product}"</div>
-<!-- 텍스트 : <p th:text="${product.pwd}"></p> -->
-<!-- 텍스트 : <p th:text="${product.name}"></p> -->
-<!-- 텍스트 : <p th:text="${product.level}"></p> -->
-<!-- 텍스트 : <p th:text="${product.desc}"></p> -->
-<!-- 텍스트 : <p th:text="${product.redDate}"></p> -->
+<br>
+<c:forEach var="data" items="${user1}">
+	${data.id}
+	${data.pwd}
+	${data.name}
+	${data.level}
+	${data.desc}
+	${data.redDate}
+	<br>
+</c:forEach>
 
 </body>
 </html>

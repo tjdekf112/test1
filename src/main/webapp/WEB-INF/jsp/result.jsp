@@ -11,7 +11,7 @@
 </head>
 <body>
 	
-	레코드 : <p th:text="${result}"></p>건 입력 성공!
+	레코드 : ${result}건 입력 성공!
 	
 	<form method="post" action="/rest" id="addbutton">
 	<input type="button" id="ajax-button" value="button">

@@ -11,6 +11,7 @@
 <body>
 	<div>로그인 완료!</div>
 	<div>${memberId}님 안녕하세요.</div>
+	<a href="/getupload">파일 업로드</a>
 	<a href="/logout">로그아웃</a>
 </body>
 </html>
