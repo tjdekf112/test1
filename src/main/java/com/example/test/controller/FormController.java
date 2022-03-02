@@ -19,16 +19,18 @@ public class FormController {
 	@Autowired UploadService uploadService;
 	@Autowired UploadMapper uploadMapper;
 
+	//업로드 화면으로.
 	@GetMapping("/getupload")
 	public String getUpload() {
 		return "upload";
 	}
 	
+	//업로드 클릭한다면..
 	@PostMapping("/postupload")
 	public String postupload(MultipartFile upfile, Model model){
-
+		
 		Map<String, Object> upload = uploadService.uploadFile(upfile);
-
+		
 		int test = (int) upload.get("falseCount");
 		// 틀린 횟수가 없다면
 		if(test == 0){
@@ -45,7 +47,7 @@ public class FormController {
 			
 		}
 	
-	
+	// 전체 결과 수 + 조회 클릭 버튼이 있는 html로
 	@GetMapping("/result")
 	public  String result(Model model , int result) {
 		System.out.println(result + "result count");
@@ -53,25 +55,16 @@ public class FormController {
 		return "result";
 	}
 	
-	
+	//restController로
 	@PostMapping("/rest")
 	public String postrest() {
 		return "redirect:/rest";
 	}
 	
+	//전체 조회 table출력하는 곳.
 	@GetMapping("/rest")
 	public String getrest() {
 		return "rest";
 	}
-	
-//	@GetMapping("/false")
-//	public String getfalse(Model model, String result, String falseCount) {
-//		
-//		
-//		model.addAttribute("result", result);
-//		model.addAttribute("falsecount", falseCount);
-//		
-//		System.out.println(model.toString() + "model");
-//		return "false";
-//	}
+
 }

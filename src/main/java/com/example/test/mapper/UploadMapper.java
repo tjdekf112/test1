@@ -22,6 +22,4 @@ public interface UploadMapper {
 	//실패한 레코드만 select
 	User falseId(String id);
 	
-	
-
 }

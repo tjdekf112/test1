@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.mapper.SingUpMapper">
+<!-- 회원가입 -->
+	<insert id="singup" parameterType="com.example.test.vo.User">
+		INSERT INTO public."USER"(
+	id, pwd, name, level, "desc", red_date)
+	VALUES (#{id}, #{pwd}, #{name}, #{level}, #{desc}, now());
+	</insert>
+<!-- 	login -->
+	<select id="login" parameterType="com.example.test.vo.User" resultType="com.example.test.vo.User">
+		SELECT
+			id
+		FROM public."USER"
+		WHERE id = #{id} AND pwd = #{pwd}
+	</select>
+</mapper>

@@ -8,7 +8,8 @@
 	VALUES (#{id}, #{pwd}, #{name}, #{level}, #{desc}, #{day});
 	</insert>
 	
-<!-- 	중복이 있어도 무시하고 실행됨. ex) ON CONFLICT (id) DO NOTHING -->
+<!-- 	중복이 있어도 무시하고 실행됨.
+ ex) ON CONFLICT (id) DO NOTHING -->
 	
 	
 <!-- 	전체성공한 dbfile의 데이터 출력 -->
