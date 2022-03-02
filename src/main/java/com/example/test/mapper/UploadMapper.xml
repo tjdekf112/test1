@@ -14,9 +14,10 @@
 	
 <!-- 	전체성공한 dbfile의 데이터 출력 -->
 	<select id="ajaxdbfile" resultType="com.example.test.vo.User">
-		SELECT id id, pwd pwd, name name, level level, "desc" desc, red_date redDate
-		FROM public."USER"
+		SELECT id id, pwd pwd, name name, level level, "desc" desc, date_trunc('second',red_date) redDate
+	FROM public."USER"
 	</select>
+	
 <!-- 	중복한 id검사 -->
 	<select id="countId" parameterType="String" resultType="int">
 	SELECT COUNT(id) AS cnt 
