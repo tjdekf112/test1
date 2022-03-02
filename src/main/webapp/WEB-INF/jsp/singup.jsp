@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://snippet.dhtmlx.com/codebase/assets/css/auxiliary_controls.css">
-   <link rel="stylesheet" href="./codebase/suite.css?v=7.3.0">
-   <script type="text/javascript" src="./codebase/suite.js"></script>
+<link rel="stylesheet" href="./codebase/suite.css?v=7.3.0">
+<script type="text/javascript" src="./codebase/suite.js"></script>
 </head>
 <body>
 
@@ -16,6 +16,7 @@
 </body>
 <script>
 var check = 1;
+
 const form = new dhx.Form("form", {
     css: "dhx_layout-cell--bordered",
     padding: 40,
@@ -113,7 +114,6 @@ $(function (){
 
 	$("#btnon").click(function() {
 	console.log( $("#id").val())
-// 	function idcheck(){
 		$.ajax({
 			url : "/idcheck",
 			type : "POST",
@@ -123,20 +123,16 @@ $(function (){
 				},
 			success : function(data){
 				if (data == 0){
-					alert("사용가능한 아이디입니다.")
+					alert("사용가능한 아이디입니다.");
 					check = data;
 				}else if(data == 1){
-					alert("중복된 아이디입니다.")
+					alert("중복된 아이디입니다.");
 					form.getItem("id").clear();
-// 					$('#id').val('');
-// 		            $('#id').clear;
 				}
 			}
 			
-		})
-// 	}
+		});
 	});
-// });
 
 	// 버튼 이벤트 버튼 클릭시 검색필터에 적은 매개변수 값 출력.
 	form.getItem("btn").events.on("click", function(events) {
