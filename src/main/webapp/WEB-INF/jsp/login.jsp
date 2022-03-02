@@ -14,7 +14,7 @@
 <body>
 
 <form method="post" action="/login" style="margin: 20px;" id="form"><h1>로그인</h1></form>
-<button id="button" style= "background-color: #87CEFA; margin: 20px">회원가입</button>
+<!-- <button id="button" style= "background-color: #87CEFA; margin: 20px">회원가입</button> -->
 </body>
 
 <script>
@@ -42,15 +42,27 @@ const form = new dhx.Form("form", {
             submit: true,
             view: "flat",
             color: "primary"
+        },
+        {
+        	id : "btnon",
+            type: "button",
+            text: "signup",
+            size: "medium",
+            color: "primary"
         }
     ]
 });
 // 버튼 클릭 시 회원가입으로 
-$(function(){
-	$('#button').click(function(){
-		location.replace("/singup");
-	});
-});
+// $(function(){
+// 	$('#button').click(function(){
+// 		location.replace("/singup");
+// 	});
+// });
+
+//버튼 클릭 시 회원가입으로 
+form.getItem("btnon").events.on("click", function(events) {
+	location.replace("/singup");
+})
 
 //버튼 이벤트 버튼 클릭시 검색필터에 적은 매개변수 값 출력.
 form.getItem("btn").events.on("click", function(events) {

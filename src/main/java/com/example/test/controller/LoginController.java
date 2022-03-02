@@ -16,12 +16,12 @@ import com.example.test.vo.User;
 public class LoginController {
 	@Autowired SingUpService singUpService;
 	
-	
+	//회원가입으로
 	@GetMapping("/singup")
 	public String getsingup() {
 		return "singup";
 	}
-	
+	// 회원가입
 	@PostMapping("/singup")
 	public String singup(User user) {
 
@@ -29,9 +29,9 @@ public class LoginController {
 		System.out.println("성공!");
 		return "redirect:/login";
 	}
-	
+	// 로그인창으로
 	@GetMapping("/login")
-	public String getlogin(HttpSession session) {
+	public String getlogin() {
 
 		return "login";
 	}
@@ -52,11 +52,12 @@ public class LoginController {
 		return "redirect:/index";
 	}
 	
+	// 로그인 후 인덱스로 이동.
 	@GetMapping("/index")
 	public String index(HttpSession session, Model model) {
+		// 세션 id값 memgberId에 저장.
 		String memberId = (String) session.getAttribute("loginMemberId");
-
-
+		// jsp에 출력할 변수 model에 저장.
 		model.addAttribute("memberId", memberId);
 		
 		//세션이 있다면 index로 접속 가능
@@ -69,6 +70,7 @@ public class LoginController {
 		
 	}
 	
+	//로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		// 세션 종료

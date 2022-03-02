@@ -22,6 +22,7 @@
 
 텍스트
 <br>
+<!-- 실패한 데이터 정보 출력 -->
 <c:forEach var="data" items="${user1}">
 	${data.id}
 	${data.pwd}

@@ -156,7 +156,6 @@ public class UploadService {
         System.out.println("User.toString" + user1.toString());
        
 		return returnMap;
-		
 	}
 	
 }
