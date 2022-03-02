@@ -21,11 +21,15 @@ public class LoginController {
 	public String getsingup() {
 		return "singup";
 	}
+	
 	// 회원가입
 	@PostMapping("/singup")
 	public String singup(User user) {
-
+		try {
 		singUpService.singup(user);
+		}catch (Exception e) {
+			return "redirect:/singup";
+		}
 		System.out.println("성공!");
 		return "redirect:/login";
 	}

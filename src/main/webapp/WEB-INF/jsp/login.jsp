@@ -41,12 +41,13 @@ const form = new dhx.Form("form", {
             size: "medium",
             submit: true,
             view: "flat",
-            color: "primary"
+            color: "primary",
         },
         {
         	id : "btnon",
             type: "button",
             text: "signup",
+            view: "flat",
             size: "medium",
             color: "primary"
         }

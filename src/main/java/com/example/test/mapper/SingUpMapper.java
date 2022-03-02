@@ -12,4 +12,6 @@ public interface SingUpMapper {
 	void singup(User user);
 	
 	User login(User user);
+	
+	int idcheck(String id);
 }

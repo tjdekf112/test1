@@ -15,6 +15,7 @@
 <form method="post" action="/singup" style="margin: 20px;" id="form"><h1>회원 가입</h1></form>
 </body>
 <script>
+var check = 1;
 const form = new dhx.Form("form", {
     css: "dhx_layout-cell--bordered",
     padding: 40,
@@ -26,6 +27,15 @@ const form = new dhx.Form("form", {
             placeholder: "ID",
             value: "",
             
+        },
+        {
+        	id : "btnon",
+            type: "button",
+            text: "ID 중복검사",
+            size: "medium",
+            submit: true,
+            view: "flat",
+            color: "primary"
         },
         {	
         	id : "pwd",
@@ -97,26 +107,62 @@ const form = new dhx.Form("form", {
         }
     ]
 });
+// form.getItem("btnon").events.on("click", function(events) {
 
-// 버튼 이벤트 버튼 클릭시 검색필터에 적은 매개변수 값 출력.
-form.getItem("btn").events.on("click", function(events) {
-// 	alert('버튼 클릭 성공!');
-	console.log();
-	console.log(form.getValue());
-	if($('#level').val() == "선택"){
-		alert('level을 선택해주세요');
-	}
-	else if($('#desc').val() != '' && $('#id').val() != '' && $('#pwd').val() != '' && $('#name').val() != '' && $('#level').val() != ''){
-		try{
-		 	form.send("singup", "POST", "user");
-		 	location.replace("/login")
-		}catch(e){
-			alert('회원가입에 실패하셨습니다.');
-		}
-	}else{
-		alert('입력하지 않은 input이 있습니다')
-	}
+$(function (){	
+
+	$("#btnon").click(function() {
+	console.log( $("#id").val())
+// 	function idcheck(){
+		$.ajax({
+			url : "/idcheck",
+			type : "POST",
+			dataType : "json",
+			data : {
+				id : $("#id").val()
+				},
+			success : function(data){
+				if (data == 0){
+					alert("사용가능한 아이디입니다.")
+					check = data;
+				}else if(data == 1){
+					alert("중복된 아이디입니다.")
+					form.getItem("id").clear();
+// 					$('#id').val('');
+// 		            $('#id').clear;
+				}
+			}
+			
+		})
+// 	}
 	});
+// });
+
+	// 버튼 이벤트 버튼 클릭시 검색필터에 적은 매개변수 값 출력.
+	form.getItem("btn").events.on("click", function(events) {
+//	 	alert('버튼 클릭 성공!');
+		console.log();
+		console.log(form.getValue());
+		if(check != 0){
+			alert('중복검사를 해주세요.');
+		}
+		else if($('#level').val() == "선택"){
+			alert('level을 선택해주세요');
+		}
+		else if($('#desc').val() != '' && $('#id').val() != '' && $('#pwd').val() != '' && $('#name').val() != '' && $('#level').val() != ''){
+			try{
+			 	form.send("singup", "POST", "user");
+			 	location.replace("/login")
+			}catch(e){
+				alert('회원가입에 실패하셨습니다.');
+			}
+		}else{
+			alert('입력하지 않은 input이 있습니다')
+		}
+		});
+});
+
+
 	
 </script>
 </html>

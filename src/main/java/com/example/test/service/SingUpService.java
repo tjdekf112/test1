@@ -26,4 +26,11 @@ public class SingUpService {
 		System.out.println("debug : "+singUpMapper.login(user));
 		return singUpMapper.login(user);
 	}
+	
+	public int idcheck(String id) {
+		
+		int idcheck = singUpMapper.idcheck(id);
+		
+		return idcheck;
+	}
 }
