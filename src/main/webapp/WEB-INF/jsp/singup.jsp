@@ -25,8 +25,8 @@ const form = new dhx.Form("form", {
         	id : "id",
             type: "input",
             label: "ID",
-            placeholder: "ID",
-            value: "",
+            required: true,
+            placeholder: "ID"
             
         },
         {
@@ -34,7 +34,6 @@ const form = new dhx.Form("form", {
             type: "button",
             text: "ID 중복검사",
             size: "medium",
-            submit: true,
             view: "flat",
             color: "primary"
         },
@@ -42,6 +41,7 @@ const form = new dhx.Form("form", {
         	id : "pwd",
             type: "input",
             label: "PWD",
+            required: true,
             placeholder: "PWD",
             value: ""
         },
@@ -49,6 +49,7 @@ const form = new dhx.Form("form", {
         	id : "name",
             type: "input",
             label: "NAME",
+            required: true,
             placeholder: "Name",
             value: ""
         },
@@ -94,6 +95,7 @@ const form = new dhx.Form("form", {
         	id : "desc",
             type: "input",
             label: "DESC",
+            required: true,
             placeholder: "desc",
             value: ""
         },
@@ -108,12 +110,11 @@ const form = new dhx.Form("form", {
         }
     ]
 });
-// form.getItem("btnon").events.on("click", function(events) {
 
 $(function (){	
-
+	// btnon클릭 시 input의 값들이 controller로 전달되는 ajax
 	$("#btnon").click(function() {
-	console.log( $("#id").val())
+		//입력한 id값이 중복인지 아닌지 체크하는 ajax
 		$.ajax({
 			url : "/idcheck",
 			type : "POST",
@@ -122,32 +123,44 @@ $(function (){
 				id : $("#id").val()
 				},
 			success : function(data){
+				// 중복되지 않은 id라면
 				if (data == 0){
 					alert("사용가능한 아이디입니다.");
 					check = data;
+				// 중복된 id라면
 				}else if(data == 1){
 					alert("중복된 아이디입니다.");
 					form.getItem("id").clear();
 				}
 			}
-			
 		});
 	});
-
+	
+	// input의 id값이 변경된다면 check 의 값을 1로 변경
+	form.getItem("id").events.on("change", function(value) {
+	    console.log("change", value);
+	    check = 1;
+	});
+	
 	// 버튼 이벤트 버튼 클릭시 검색필터에 적은 매개변수 값 출력.
 	form.getItem("btn").events.on("click", function(events) {
 //	 	alert('버튼 클릭 성공!');
 		console.log();
 		console.log(form.getValue());
-		if(check != 0){
+		// 검사한 값이 중복된 id이고 id 의 값이 "" 라면
+		if(check != 0 || form.getValue()['id'] == ""){
 			alert('중복검사를 해주세요.');
 		}
+		//level의 값이 "선택"이라면...
 		else if($('#level').val() == "선택"){
 			alert('level을 선택해주세요');
 		}
-		else if($('#desc').val() != '' && $('#id').val() != '' && $('#pwd').val() != '' && $('#name').val() != '' && $('#level').val() != ''){
+		// desc, name, pwd의 값이 "" 이라면
+		else if(form.getValue()['desc'] != "" && form.getValue()['name'] != "" && form.getValue()['pwd'] != ""){
 			try{
-			 	form.send("singup", "POST", "user");
+				// post방식의 /singup으로 user의 값을 전송하겠다.
+				form.send("singup", "POST", "user");
+				// get방식의 /login으로 이동하겟다.
 			 	location.replace("/login")
 			}catch(e){
 				alert('회원가입에 실패하셨습니다.');
@@ -155,10 +168,9 @@ $(function (){
 		}else{
 			alert('입력하지 않은 input이 있습니다')
 		}
-		});
+	});
 });
 
 
-	
 </script>
 </html>

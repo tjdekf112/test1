@@ -24,14 +24,8 @@
 <title>rest</title>
 <body>
 조회 성공!
-<!-- dhtmls grid방식 -->
+<!-- dhtmlx grid방식 -->
 <div style="height: 500px; width: 100%" id="grid"></div>
-
-<!-- ajax 데이터 불러오기 -->
-<!-- <table border="1" > -->
-<!--  <tbody id="demo"></tbody> -->
-<!-- </table> -->
-
 </body>
 
 <script>
@@ -45,8 +39,10 @@ $(function(){
 			alert('연결성공');
 			console.log(data);
 			var demo1 = data
+			//dhtmlx를 활용한 grid에 값을 저장.
 			const grid = new dhx.Grid("grid", {
 			    columns: [
+			    	//불러오는 daba는 json형식이기 때문에 그에 맞는 형식으로 컬럼은 만들어줘야함.
 			        { width: 200, id: "id", header: [{ text: "id" }] },
 			        { width: 150, id: "pwd", header: [{ text: "pwd" }] },
 			        { width: 150, id: "name", header: [{ text: "name" }] },
@@ -55,41 +51,12 @@ $(function(){
 			        { width: 150, id: "redDate", header: [{ text: "redDate" }] },
 			    ],
 			    data: demo1
-			});
-			
-			
-// 			ajax데이터 body에 출력.
-// 				for(var i =0; i< data.length; i++){
-// 					var demo =[
-// 						{
-// 							id : data[i].id,
-// 							pwd : data[i].pwd,
-// 							name : data[i].name,
-// 							level : data[i].level,
-// 							desc : data[i].desc,
-// 							redDate : data[i].redDate
-// 						}
-						
-						
-						
-// 					$("#demo").append("<tr>"); 
-
-// 					$("#demo").append("<td>"+data[i].id+"</td>");
-// 					$("#demo").append("<td>"+data[i].pwd+"</td>");
-// 					$("#demo").append("<td>"+data[i].name+"</td>");
-// 					$("#demo").append("<td>"+data[i].level+"</td>");
-// 					$("#demo").append("<td>"+data[i].desc+"</td>");
-// 					$("#demo").append("<td>"+data[i].redDate+"</td>");
-// 					$("#demo").append("</tr>"); 
-// 					]
-// 				}
-				  
+			}); 
 		},
 		error : function() {
 			alert('error');			
 		}
 	})
-// 	})
 })
 
 

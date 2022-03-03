@@ -20,6 +20,5 @@
 		SELECT COUNT(*)
 		FROM public."USER"
 		WHERE id = #{id}
-	
 	</select>
 </mapper>

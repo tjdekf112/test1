@@ -33,26 +33,20 @@ public class LoginController {
 		System.out.println("성공!");
 		return "redirect:/login";
 	}
+	
 	// 로그인창으로
 	@GetMapping("/login")
-	public String getlogin() {
-
+	public String getlogin(HttpSession session) {
+		String memberId = (String) session.getAttribute("loginMemberId");
+		//로그인 상태라면 index로 이동.
+		if(memberId != null) {
+			return "redirect:/index";
+		}
 		return "login";
 	}
-	
-	@PostMapping("login")
-	public String postlogin(HttpSession session, User user) {
-		System.out.println("user : debug" + user.toString());
-		
-		User loginMember = singUpService.login(user);
-		// 로그인 시 테이블에 해당하는 ID,PW가 없을 시 리턴.
-		if(loginMember ==  null) {
-			return "redirect:/login";
-		}
-		
-		// 세션에 로그인한 계정의 id를 저장.
-		session.setAttribute("loginMemberId", loginMember.getId());
 
+	@PostMapping("/login")
+	public String ajaxLogin() {
 		return "redirect:/index";
 	}
 	
@@ -63,15 +57,12 @@ public class LoginController {
 		String memberId = (String) session.getAttribute("loginMemberId");
 		// jsp에 출력할 변수 model에 저장.
 		model.addAttribute("memberId", memberId);
-		
 		//세션이 있다면 index로 접속 가능
 		if(memberId != null) {
 		return "index";
 		}
-
 		// 세션이 없다면 로그인 창으로.
 		return "redirect:/login";
-		
 	}
 	
 	//로그아웃

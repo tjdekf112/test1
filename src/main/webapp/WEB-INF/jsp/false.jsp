@@ -32,6 +32,6 @@
 	${data.redDate}
 	<br>
 </c:forEach>
-
+<a href="/getupload">이전으로</a>
 </body>
 </html>

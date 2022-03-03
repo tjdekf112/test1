@@ -15,13 +15,12 @@
 	</div>
 	<button type="button" id="addUpLoadBtn">upload</button>
 	</form>
-
+	<a href="index">메인 페이지로</a>
   <script>
   //변수 선언
   var fileName;
   var filename;
   $(function(){
-
 	  $('#addUpLoadBtn').click(function(){
 		  //업로드를 클릭한 파일의 이름
 		  filename = $("#upfile").val()
@@ -36,15 +35,12 @@
 	  			//확장자가 'dbfile'일 경우에만 가능.
 		        else if(fileName == "dbfile" ){
 		        	$('#adduploadForm').submit();
-	  				
 	  			}
 	  			//확장자가 'dbfile'이 아니라면
 	  			else if(fileName != "dbfile" ){
 	  				alert('dbfile확장자만 가능합니다.');
 	  			}
-	  
 	     });
-	  
 	  });
  </script>
 </body>

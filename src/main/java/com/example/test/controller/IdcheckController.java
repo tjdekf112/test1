@@ -16,8 +16,10 @@ public class IdcheckController {
 		System.out.println(id + "id");
 		int str = 0;
 		int idcheck = singUpService.idcheck(id);
+		// 중복된 이라면
 		if(idcheck >= 1) {
 			str = 1;
+		// 중복된 값이 아니라면
 		}else if(idcheck == 0) {
 			str = 0;
 		}

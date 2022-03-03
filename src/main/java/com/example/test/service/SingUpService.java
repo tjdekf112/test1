@@ -27,6 +27,7 @@ public class SingUpService {
 		return singUpMapper.login(user);
 	}
 	
+	// id중복체크를 위한 반환값
 	public int idcheck(String id) {
 		
 		int idcheck = singUpMapper.idcheck(id);
