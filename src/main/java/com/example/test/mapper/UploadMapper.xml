@@ -13,9 +13,11 @@
 	
 	
 <!-- 	전체성공한 dbfile의 데이터 출력 -->
-	<select id="ajaxdbfile" resultType="com.example.test.vo.User">
+	<select id="ajaxdbfile" parameterType="String" resultType="com.example.test.vo.User">
+	
 	SELECT id id, pwd pwd, name name, level level, "desc" desc, to_char(red_date, 'YYYY-MM-DD HH12:MM:SS') redDate
 		FROM public."USER"
+		WHERE id = #{id}
 	</select>
 	
 <!-- 	중복한 id검사 -->

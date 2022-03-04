@@ -12,4 +12,9 @@ public interface SingUpMapper {
 	User login(User user);
 	// 중복 아이디 체크
 	int idcheck(String id);
+	// 관리자 유무 체크
+	String levelcheck(String id);
+	// 회원 탈퇴
+	void delete(String id);
+	
 }

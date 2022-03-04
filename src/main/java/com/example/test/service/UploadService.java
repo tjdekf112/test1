@@ -23,11 +23,14 @@ import com.example.test.vo.User;
 @Service
 public class UploadService {
 	@Autowired UploadMapper uploadMapper;
-	@SuppressWarnings("unlikely-arg-type")
 	
+	ArrayList<String> returnId = new ArrayList<String>();
+
+	@SuppressWarnings("unlikely-arg-type")
 	public Map<String, Object> uploadFile(MultipartFile upfile) {
 		   Map<String, Object> paramMap = new HashMap<>();
 		   Map<String, Object> returnMap = new HashMap<>();
+		   returnId = new ArrayList<String>();
 		   
 		   int result = 0;
 		   int resultCount = 0;
@@ -81,8 +84,11 @@ public class UploadService {
                String level = array[3];
                String desc = array[4];
                String redDate = array[5];
-               
-               paramMap.put("id", id);
+               // id의 값 리스트에 입력. 전체 성공시 조회에서 where절에 들어갈 id값임.
+	       	   returnId.add(id);
+	           System.out.println(returnId.toString() + "returnId");
+	           
+	           paramMap.put("id", id);
                paramMap.put("pwd", pwd);
                paramMap.put("name", name);
                paramMap.put("level", level);
@@ -156,6 +162,19 @@ public class UploadService {
         System.out.println("User.toString" + user1.toString());
        
 		return returnMap;
+	}
+	
+	// 업로드에서 전체 성공한 것만 보여 줌.
+	public List<User> returnId() {
+		List<User> testuser = new ArrayList<>();
+
+//		System.out.println(returnId.get(0).getId()+ "get debigㅁㄴㅇ");
+		System.out.println(returnId.toString() + "returnId.toString()");
+		for(int i=0; i<returnId.size() ; i++) {
+			testuser.add(uploadMapper.ajaxdbfile(returnId.get(i))); 
+			System.out.println(testuser.toString() + "toString입니다!");
+		}
+		return testuser;
 	}
 	
 }

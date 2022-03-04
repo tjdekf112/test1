@@ -123,8 +123,11 @@ $(function (){
 				id : $("#id").val()
 				},
 			success : function(data){
+				if(form.getValue()['id'] == ""){
+					alert("id를 입력해주세요");
+				}
 				// 중복되지 않은 id라면
-				if (data == 0){
+				else if (data == 0){
 					alert("사용가능한 아이디입니다.");
 					check = data;
 				// 중복된 id라면
@@ -148,7 +151,7 @@ $(function (){
 		console.log();
 		console.log(form.getValue());
 		// 검사한 값이 중복된 id이고 id 의 값이 "" 라면
-		if(check != 0 || form.getValue()['id'] == ""){
+		if(check != 0){
 			alert('중복검사를 해주세요.');
 		}
 		//level의 값이 "선택"이라면...

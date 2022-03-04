@@ -34,4 +34,14 @@ public class SingUpService {
 		
 		return idcheck;
 	}
+	// 관리자 유무 체크
+	public String levelcheck(String id) {
+		String levelcheck = singUpMapper.levelcheck(id);
+		return levelcheck;
+	}
+	
+	//회원 탈퇴
+	public void delete(String id) {
+		singUpMapper.delete(id);
+	}
 }

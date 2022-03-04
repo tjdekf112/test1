@@ -82,6 +82,8 @@ $(function (){
 		         // DB에 저장된 계정이 아니라면 
 		         }else if (data == 1){
 		             alert("로그인 실패!");
+		             form.getItem("id").clear();
+		             form.getItem("pwd").clear();
 		         // DB에 저장된 id와 pwd라면
 		          }else if(data == 0) {
 		             $('#form').submit();

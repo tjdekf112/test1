@@ -44,7 +44,6 @@ public class FormController {
 		model.addAttribute("falseCount",upload.get("falseCount"));
 		// 틀린 횟수가 1개라도 있다면.
 		return "false";
-			
 		}
 	
 	// 전체 결과 수 + 조회 클릭 버튼이 있는 html로

@@ -35,9 +35,11 @@ $(function(){
 	$.ajax({
 		url:'/search',
 		type : 'get',
+		
 			success:function(data){
 			alert('연결성공');
 			console.log(data);
+
 			var demo1 = data
 			//dhtmlx를 활용한 grid에 값을 저장.
 			const grid = new dhx.Grid("grid", {

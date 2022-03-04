@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.test.service.SingUpService;
 import com.example.test.vo.User;
 
-
 @Controller
 public class LoginController {
 	@Autowired SingUpService singUpService;
@@ -57,8 +56,10 @@ public class LoginController {
 		String memberId = (String) session.getAttribute("loginMemberId");
 		// jsp에 출력할 변수 model에 저장.
 		model.addAttribute("memberId", memberId);
+		String levelcheck = singUpService.levelcheck(memberId);
 		//세션이 있다면 index로 접속 가능
 		if(memberId != null) {
+		model.addAttribute("levelcheck", levelcheck);
 		return "index";
 		}
 		// 세션이 없다면 로그인 창으로.
@@ -71,5 +72,14 @@ public class LoginController {
 		// 세션 종료
 		session.invalidate();
 		return "redirect:/login";
+	}
+	
+	//회원 탈퇴
+	@GetMapping("/delete")
+	public String delete(HttpSession session) {
+		String memberId = (String) session.getAttribute("loginMemberId");
+		singUpService.delete(memberId);
+		return "login";
+		
 	}
 }

@@ -20,10 +20,10 @@ public class SearchController {
 	public List<User> getsearch(Model model){
 		System.out.println("test" );
 		// 전체 성공한 dbfile의 데이터 출력
-		List<User> user = uploadMapper.ajaxdbfile();
+		List<User> user = uploadService.returnId();
 		
 //		model.addAttribute("user", user);
-		System.out.println(user.toString());
+		System.out.println(user.toString() + "시험입니다.");
 		//user 값 리턴
 		return user;
 		
