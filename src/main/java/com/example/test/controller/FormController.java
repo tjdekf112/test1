@@ -1,5 +1,6 @@
 package com.example.test.controller;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,8 +28,8 @@ public class FormController {
 	
 	//업로드 클릭한다면..
 	@PostMapping("/postupload")
-	public String postupload(MultipartFile upfile, Model model){
-		
+	public String postupload(List<MultipartFile> upfile, Model model){
+		System.out.println(upfile.toString() + "count debug");
 		Map<String, Object> upload = uploadService.uploadFile(upfile);
 		
 		int test = (int) upload.get("falseCount");
@@ -38,7 +39,7 @@ public class FormController {
 		}
 		
 		//모델이 키값과 value값을 입력.
-		model.addAttribute("user1", upload.get("user1"));
+//		model.addAttribute("user1", upload.get("user1"));
 		model.addAttribute("list", upload.get("list"));
 		model.addAttribute("result", upload.get("result"));
 		model.addAttribute("falseCount",upload.get("falseCount"));

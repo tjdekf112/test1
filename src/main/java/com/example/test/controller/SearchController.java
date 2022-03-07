@@ -28,5 +28,15 @@ public class SearchController {
 		return user;
 		
 	}
+	// 업로드에 실패한 데이터 출력.
+	@GetMapping("/false")
+	public List<User> getfalse(Model model){
+		List<User> user1 = uploadService.returnFalse();
+		System.out.println(user1.toString() + "controller toString");
+		model.addAttribute("user1",user1);
+		//user1의 데이터를 ajax로 반환.
+		return user1;
+		
+	}
 	
 }

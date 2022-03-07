@@ -25,34 +25,47 @@ public class UploadService {
 	@Autowired UploadMapper uploadMapper;
 	
 	ArrayList<String> returnId = new ArrayList<String>();
-
+	List<User> user1 = new ArrayList<>();
+	   int i =0;
+	   File convFile = null;
+	   
 	@SuppressWarnings("unlikely-arg-type")
-	public Map<String, Object> uploadFile(MultipartFile upfile) {
+	public Map<String, Object> uploadFile(List<MultipartFile> upfile) {
 		   Map<String, Object> paramMap = new HashMap<>();
 		   Map<String, Object> returnMap = new HashMap<>();
-		   returnId = new ArrayList<String>();
 		   
+		   returnId = new ArrayList<String>();
+		   user1 = new ArrayList<>();
+		   i = 0;
+		   convFile = null;
 		   int result = 0;
 		   int resultCount = 0;
 		   int falseCount =0;
 		   int totalCount =0;
 		   int recodeCount =0;
+		   int k =0;
 		   // list 선언.
 		   List<Object> list = null;
 		   list = new ArrayList<Object>();
-		   
-		   List<User> user1 = null;
-		   user1 = new ArrayList<User>();
+		   for(i =0; i< upfile.size(); i++) {
 //		   int[] recode = {};
-		 File convFile = new File(upfile.getOriginalFilename());
-		// 매개변수로 받은 파일을 byte형으로 형 변환
+		 convFile = new File(upfile.get(i).getOriginalFilename());
+		 System.out.println(upfile.get(i) +  "for문 디버깅");
+		   }
 		 try {
+			 
+			 
 			convFile.createNewFile();
 //			파일을 생성한다. 존재하는 파일일 경우 덮어쓰기함.
 			FileOutputStream fos = new FileOutputStream(convFile); 
-			
 			//입력받은 내용을 파일 내용으로 기록.
-			fos.write(upfile.getBytes());
+			for(k = 0; k<upfile.size(); k++) {
+			fos.write(upfile.get(k).getBytes());
+			System.out.println(k + "kkkkk");
+			}
+			System.out.println("debug");
+			System.out.println(upfile.get(0).getBytes() + "fos  디버깅 !");
+			
 			fos.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -155,11 +168,11 @@ public class UploadService {
         returnMap.put("result", result);
         returnMap.put("falseCount", falseCount);
         returnMap.put("list", list);
-        returnMap.put("user1", user1);
+//        returnMap.put("user1", user1);
         
         System.out.println("result : " + result);
         System.out.println("totalCount" + totalCount);
-        System.out.println("User.toString" + user1.toString());
+//        System.out.println("User.toString" + user1.toString());
        
 		return returnMap;
 	}
@@ -175,6 +188,11 @@ public class UploadService {
 			System.out.println(testuser.toString() + "toString입니다!");
 		}
 		return testuser;
+	}
+	// 실패한 텍스트
+	public List<User> returnFalse(){
+		System.out.println(user1.toString() + "false 디버깅");
+		return user1;
 	}
 	
 }

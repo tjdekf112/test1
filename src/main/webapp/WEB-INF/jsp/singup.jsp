@@ -28,11 +28,11 @@ const form = new dhx.Form("form", {
             required: true,
             placeholder: "ID",
             validation: function(value) {
-                return value && value.length >= 6;
+                return value && value.length >= 4;
               },
               errorMessage: "너무 짧습니다",
               successMessage: "가능합니다.",
-              preMessage: "6글자 이상 써주세요",  
+              preMessage: "4글자 이상 써주세요",  
         },
         {
         	id : "btnon",
@@ -50,11 +50,11 @@ const form = new dhx.Form("form", {
             placeholder: "PWD",
             value: "",
             validation: function(value) {
-                return value && value.length >= 6;
+                return value && value.length >= 4;
               },
               errorMessage: "너무 짧습니다",
               successMessage: "가능합니다.",
-              preMessage: "6글자 이상 써주세요",  
+              preMessage: "4글자 이상 써주세요",  
         },
         {
         	id : "name",
@@ -136,8 +136,8 @@ $(function (){
 			success : function(data){
 				if(form.getValue()['id'] == ""){
 					alert("id를 입력해주세요");
-				}else if(form.getValue()['id'].length < 6){
-					alert("id를 6글자 이상 입력해주세요");
+				}else if(form.getValue()['id'].length < 4){
+					alert("id를 4글자 이상 입력해주세요");
 				}
 				// 중복되지 않은 id라면
 				else if (data == 0){
@@ -166,8 +166,8 @@ $(function (){
 		// 검사한 값이 중복된 id이고 id 의 값이 "" 라면
 		if(check != 0){
 			alert('중복검사를 해주세요.');
-		}else if(form.getValue()['pwd'].length < 6){
-			alert("pwd를 6글자 이상 입력해주세요");
+		}else if(form.getValue()['pwd'].length < 4){
+			alert("pwd를 4글자 이상 입력해주세요");
 		}
 		//level의 값이 "선택"이라면...
 		else if($('#level').val() == "선택"){
@@ -188,7 +188,6 @@ $(function (){
 		}
 	});
 });
-
 
 </script>
 </html>

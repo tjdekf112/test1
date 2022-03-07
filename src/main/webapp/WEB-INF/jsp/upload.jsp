@@ -11,7 +11,7 @@
 <h1>데이터 업로드</h1>
 	<form method="post" enctype="multipart/form-data"  action="/postupload" id="adduploadForm">
 	<div>
-	<input type="File" name="upfile" id="upfile">
+	<input type="File" multiple="multiple" name="upfile" id="upfile">
 	</div>
 	<button type="button" id="addUpLoadBtn">upload</button>
 	</form>
@@ -42,6 +42,7 @@
 	  			}
 	     });
 	  });
+  
  </script>
 </body>
 </html>
