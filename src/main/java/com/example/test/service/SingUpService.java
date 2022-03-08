@@ -14,24 +14,17 @@ public class SingUpService {
 	
 	//회원 가입
 	public void singup(User user) {
-		System.out.println("user" + user.toString()+ "@#$@");
-		//회원가입\
-		
 		singUpMapper.singup(user);
 	}
 	
 	//login
 	public User login(User user) {
-
-		System.out.println("debug : "+singUpMapper.login(user));
 		return singUpMapper.login(user);
 	}
 	
 	// id중복체크를 위한 반환값
 	public int idcheck(String id) {
-		
 		int idcheck = singUpMapper.idcheck(id);
-		
 		return idcheck;
 	}
 	// 관리자 유무 체크

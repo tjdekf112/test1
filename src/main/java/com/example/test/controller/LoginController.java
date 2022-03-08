@@ -29,7 +29,6 @@ public class LoginController {
 		}catch (Exception e) {
 			return "redirect:/singup";
 		}
-		System.out.println("성공!");
 		return "redirect:/login";
 	}
 	

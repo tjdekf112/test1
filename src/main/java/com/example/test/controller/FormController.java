@@ -39,7 +39,6 @@ public class FormController {
 		}
 		
 		//모델이 키값과 value값을 입력.
-//		model.addAttribute("user1", upload.get("user1"));
 		model.addAttribute("list", upload.get("list"));
 		model.addAttribute("result", upload.get("result"));
 		model.addAttribute("falseCount",upload.get("falseCount"));

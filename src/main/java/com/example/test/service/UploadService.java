@@ -48,9 +48,7 @@ public class UploadService {
 		   List<Object> list = null;
 		   list = new ArrayList<Object>();
 		   for(i =0; i< upfile.size(); i++) {
-//		   int[] recode = {};
 		 convFile = new File(upfile.get(i).getOriginalFilename());
-		 System.out.println(upfile.get(i) +  "for문 디버깅");
 		   }
 		 try {
 			 
@@ -61,10 +59,7 @@ public class UploadService {
 			//입력받은 내용을 파일 내용으로 기록.
 			for(k = 0; k<upfile.size(); k++) {
 			fos.write(upfile.get(k).getBytes());
-			System.out.println(k + "kkkkk");
 			}
-			System.out.println("debug");
-			System.out.println(upfile.get(0).getBytes() + "fos  디버깅 !");
 			
 			fos.close();
 		} catch (IOException e1) {
@@ -80,16 +75,9 @@ public class UploadService {
            while(scan.hasNextLine()){
         	   totalCount++;
                String test = scan.nextLine();
-               System.out.println(test);
                
                //split을 사용하여 '/'단위로 자르기.
-               String[] array = test.split("/");
-               
-               for(int i=0;i<array.length;i++) {
-            	   System.out.print(array[i]+ " ");
-            	   
-               }
-               System.out.println("");
+               String[] array = test.split("/");        
 
                String id = array[0];
                String pwd = array[1];
@@ -99,21 +87,13 @@ public class UploadService {
                String redDate = array[5];
                // id의 값 리스트에 입력. 전체 성공시 조회에서 where절에 들어갈 id값임.
 	       	   returnId.add(id);
-	           System.out.println(returnId.toString() + "returnId");
 	           
 	           paramMap.put("id", id);
                paramMap.put("pwd", pwd);
                paramMap.put("name", name);
                paramMap.put("level", level);
                paramMap.put("desc", desc);
-               
-               /*
-               user.setId(id);
-               user.setPwd(pwd);
-               user.setName(name);
-               user.setLevel(level);
-               user.setDesc(desc);
-               */
+
                //list type의 user1에 실패한 레코드 입력.
                user1.add(uploadMapper.falseId(id));
                //null이 있을경우 사라지게함.
@@ -124,7 +104,6 @@ public class UploadService {
             	   
 				Date day = transFormat.parse(redDate);
 	               paramMap.put("day", day);
-	               System.out.println("debug : " + paramMap.toString());
 	               
 	               //중복체크.
 	               int countId = uploadMapper.countId(id);
@@ -135,8 +114,6 @@ public class UploadService {
 		               resultCount = uploadMapper.fileuplaod(paramMap);
 		               // 성공횟수.
 		               result = result + resultCount;
-		               
-		               System.out.println(result + "result@#@");
 		               } 
 		               
 	               //중복이라면
@@ -144,14 +121,11 @@ public class UploadService {
 		            	   //실패횟수
 			               falseCount++;
 			               for(recodeCount =1; recodeCount<totalCount; recodeCount++) {
-			            	   System.out.println("recodeCount @#@#@#@    " + recodeCount);
-			 
+			            	   System.out.println("recodeCount   " + recodeCount);
 			               }
 			               // 실패한 레코드의 라인번호 list 형태로 입력.
 			               list.add(recodeCount);
 			    
-			               System.out.println(recodeCount + "  recodeCount@@@@@@@@@@@@@@@@@@@@@@@@@2@3j@#");
-			               System.out.println(falseCount + "falseCount@#@");
 		               }
 		               
 			} catch (ParseException e) {
@@ -168,12 +142,7 @@ public class UploadService {
         returnMap.put("result", result);
         returnMap.put("falseCount", falseCount);
         returnMap.put("list", list);
-//        returnMap.put("user1", user1);
         
-        System.out.println("result : " + result);
-        System.out.println("totalCount" + totalCount);
-//        System.out.println("User.toString" + user1.toString());
-       
 		return returnMap;
 	}
 	
@@ -181,17 +150,13 @@ public class UploadService {
 	public List<User> returnId() {
 		List<User> testuser = new ArrayList<>();
 
-//		System.out.println(returnId.get(0).getId()+ "get debigㅁㄴㅇ");
-		System.out.println(returnId.toString() + "returnId.toString()");
 		for(int i=0; i<returnId.size() ; i++) {
 			testuser.add(uploadMapper.ajaxdbfile(returnId.get(i))); 
-			System.out.println(testuser.toString() + "toString입니다!");
 		}
 		return testuser;
 	}
 	// 실패한 텍스트
 	public List<User> returnFalse(){
-		System.out.println(user1.toString() + "false 디버깅");
 		return user1;
 	}
 	
