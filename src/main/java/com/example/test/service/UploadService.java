@@ -50,9 +50,7 @@ public class UploadService {
 		   for(i =0; i< upfile.size(); i++) {
 		 convFile = new File(upfile.get(i).getOriginalFilename());
 		   }
-		 try {
-			 
-			 
+		 try { 
 			convFile.createNewFile();
 //			파일을 생성한다. 존재하는 파일일 경우 덮어쓰기함.
 			FileOutputStream fos = new FileOutputStream(convFile); 
@@ -60,16 +58,13 @@ public class UploadService {
 			for(k = 0; k<upfile.size(); k++) {
 			fos.write(upfile.get(k).getBytes());
 			}
-			
 			fos.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
-			
 		} 
 		 
 		// 형 변환한 파일 읽기
   	    try {
-  	    	
   	    	// scan을 사용하면 한번에 읽기가 가능함.
   	    	Scanner scan = new Scanner(convFile);
            while(scan.hasNextLine()){
